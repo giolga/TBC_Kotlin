@@ -50,27 +50,55 @@ class Solution {
         return  if(isNegative) -answer else answer
     }
 
+    fun isPalindrome(string: String): Boolean {
+        var arr = Array(string.length) {IntArray(string.length)}
+
+        for(k in string.indices) {
+            for(i in string.indices) {
+                val j: Int = k + i + 1
+
+                if(j <= string.length - 1) {
+                    if(string[i] == string[j]) arr[i][j] = arr[i+1][j-1]
+                    else arr[i][j] = Math.min(arr[i][j - 1], arr[i+1][j]) + 1
+                }
+            }
+        }
+
+        return if(arr[0][string.length - 1] == 0) true else false
+    }
 
 }
 
 fun main() {
     val solution: Solution = Solution()
-    println(solution.gcd(n = 12, m = 18))
-    println(solution.lcm(n = 12, m = 18))
-    println(solution.hasDollar(string = "Where is another sky," +
+
+    println("USG (12, 18):\t ${solution.gcd(n = 12, m = 18)}")
+    println("USJ (12, 18): \t ${solution.lcm(n = 12, m = 18)} \n")
+
+    println("Dollar checker: ")
+    println("\t ${solution.hasDollar(string = "Where is another sky," +
                                     "Deeply blue and pure,exactly such, " +
                                     "like yours.Wound of the past, " +
                                     "Ruins of \"Narikala\"" +
-                                    "Which remained like gray hair."))
+                                    "Which remained like gray hair.")}")
 
-    println(solution.hasDollar(string = "I need a dollar, dollar" +
+    println("\t ${solution.hasDollar(string = "I need a dollar, dollar" +
                                     "Dollar, that's what I need (Hey, hey)" +
                                     "Well, I need a do'$'lar, dollar" +
                                     "Dollar, that's what I need (Hey, hey)" +
-                                    "Said I need a dollar, dollar"))
+                                    "Said I need a dollar, dollar")}\n")
 
-    println(solution.sumOfEvenNumbers())
-    println(solution.reverseNumber(n = 10220))
-    println(solution.reverseNumber(n = -10220))
+    print("Sum of even numbers between 0 and 100: \t")
+    println("${solution.sumOfEvenNumbers()} \n")
+
+    println("Reverse numbers: ")
+    println("\t ${solution.reverseNumber(n = 10220)}")
+    println("\t ${solution.reverseNumber(n = -10220)}\n")
+
+    println("Palindromes:")
+    println("\t ${solution.isPalindrome(string = "abracadabra")}") // false
+    println("\t ${solution.isPalindrome(string = "civic")}") // true
+    println("\t ${solution.isPalindrome(string = "eye")}") // true
+    println("\t ${solution.isPalindrome(string = "poatan")}") //false
 
 }
