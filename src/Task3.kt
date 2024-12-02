@@ -1,9 +1,17 @@
 fun main() {
+    var georgian: MutableMap<Int, String> = mutableMapOf()
+    var english: MutableMap<Int, String> = mutableMapOf()
+
     val georgianUnits = listOf("", "ერთი", "ორი", "სამი", "ოთხი", "ხუთი", "ექვსი", "შვიდი", "რვა", "ცხრა")
     val georgianTens = listOf("", "ათი", "ოცდა", "ოცდა","ორმოცდა", "ორმოცდა", "სამოცდა", "სამოცდა", "ოთხმოცდა", "ოთხმოცდა")
     val georgianAdditionalNumbers = listOf("", "თერთმეტი", "თორმეტი", "ცამეტი", "თოთხმეტი", "თხუთმეტი", "თექვსმეტი", "ჩვიდმეტი", "თვრამეტი", "ცხრამეტი")
     val georgianHundreds = listOf("", "ას", "ორას", "სამას", "ოთხას", "ხუთას", "ექვსას", "შვიდას", "რვაას", "ცხრაას")
     val georgianThousand = "ათასი"
+
+    val englishUnits = listOf("", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
+    val englishTens = listOf("", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")
+    val englishAdditionalNumbers = listOf("", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen")
+    val thousand = "thousand"
 
     for (i in 1..1000) {
         var ans: String = ""
@@ -66,6 +74,40 @@ fun main() {
             }
         }
 
+        georgian[i] = ans
+    }
+
+    for(i in georgian) {
+        println("${i.key} : ${i.value}")
+    }
+
+    for(i in 1 .. 1000) {
+        var ans = ""
+        when {
+            i == 1000 -> ans = thousand
+            i < 10 -> ans = englishUnits[i]
+            i in 11 .. 19 -> ans = englishAdditionalNumbers[i % 10]
+            i in 20 .. 99 -> {
+                val tens = i / 10
+                val units = i % 10
+
+                if(units == 0) {
+                    ans = englishTens[tens]
+                }
+                else {
+                    ans = englishTens[tens] + " " + englishUnits[units]
+                }
+            }
+            else -> {
+                val tens = i / 10
+                val units = i % 10
+                val hundred = i / 100
+
+                ans = englishUnits[hundred] + " hundred" + englishTens[tens] + englishUnits[units]
+            }
+        }
+
         println("$i : $ans")
     }
+
 }
