@@ -103,7 +103,10 @@ fun main() {
                 val tens = (i / 10) % 10
                 val units = i % 10
 
-                ans = if(units == 0) englishUnits[hundred] + " hundred " + englishTens[tens]  else englishUnits[hundred] + " hundred " + englishTens[tens] + "-" + englishUnits[units]
+                ans = if(units == 0) englishUnits[hundred] + " hundred " + englishTens[tens]  else {
+                    if(tens == 1) englishUnits[hundred] + " hundred " + englishAdditionalNumbers[units]
+                    else englishUnits[hundred] + " hundred " + englishTens[tens] + "-" + englishUnits[units]
+                }
             }
         }
 
