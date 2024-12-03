@@ -99,15 +99,16 @@ fun main() {
                 }
             }
             else -> {
-                val tens = i / 10
-                val units = i % 10
                 val hundred = i / 100
+                val tens = (i / 10) % 10
+                val units = i % 10
 
-                ans = englishUnits[hundred] + " hundred" + englishTens[tens] + englishUnits[units]
+                ans = if(units == 0) englishUnits[hundred] + " hundred " + englishTens[tens]  else englishUnits[hundred] + " hundred " + englishTens[tens] + "-" + englishUnits[units]
             }
         }
 
         println("$i : $ans")
+        english[i] = ans
     }
 
 }
