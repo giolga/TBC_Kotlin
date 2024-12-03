@@ -107,11 +107,6 @@ fun main() {
             }
         }
 
-<<<<<<< HEAD
-        println("$i : $ans")
-=======
-//        println("$i : $ans")
->>>>>>> 33fafbeedca800a51126bd5c74466b2b3c79760e
         english[i] = ans
     }
 
